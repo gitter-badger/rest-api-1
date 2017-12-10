@@ -2,7 +2,7 @@
 <html ng-app="app">
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='public/stylesheets/style.css'/>
 </head>
 <body>
 <h1><%= title %></h1>
@@ -10,9 +10,9 @@
 <ng-view></ng-view>
 
 <!-- Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-resource.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/angular-resource/angular-resource.min.js"></script>
 
 <!-- Template -->
 <script type="text/ng-template" id="/todos.html">
@@ -21,8 +21,7 @@
         <li ng-repeat="todo in todos | filter: search">
             <input type="checkbox" ng-model="todo.completed" ng-change="update($index)">
             <a ng-show="!editing[$index]" href="#/{{todo._id}}">{{todo.name}}</a>
-            <button ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
-
+            <button class="button" ng-show="!editing[$index]" ng-click="edit($index)">edit</button>
             <input ng-show="editing[$index]" type="text" ng-model="todo.name">
             <button ng-show="editing[$index]" ng-click="update($index)">Update</button>
             <button ng-show="editing[$index]" ng-click="cancel($index)">Cancel</button>
@@ -37,7 +36,6 @@
     <h1>{{ todo.name }}</h1>
     completed: <input type="checkbox" ng-model="todo.completed"><br>
     note: <textarea ng-model="todo.note"></textarea><br><br>
-
     <button ng-click="update()">Update</button>
     <button ng-click="remove()">Remove</button>
     <a href="/">Cancel</a>
@@ -61,38 +59,42 @@
     //---------------
 
     .controller('TodoController', [
-      '$scope', 'Todos', ($scope, Todos) => {
+      '$scope', 'Todos', function($scope, Todos){
         $scope.editing = [];
         $scope.todos = Todos.query();
 
-        $scope.save = () => {
+        $scope.save = function() {
           if (!$scope.newTodo || $scope.newTodo.length < 1) return;
           var todo = new Todos({ name: $scope.newTodo, completed: false });
 
-          todo.$save(() => {
+      // Save ToDo item
+          todo.$save(function() {
             $scope.todos.push(todo);
             $scope.newTodo = ''; // clear textbox
           });
         };
 
-        $scope.update = index => {
+      // Update ToDo item
+        $scope.update = function(index) {
           var todo = $scope.todos[index];
           Todos.update({ id: todo._id }, todo);
           $scope.editing[index] = false;
         };
 
-        $scope.edit = index => {
+        // Edit ToDo item
+        $scope.edit = function(index) {
           $scope.editing[index] = angular.copy($scope.todos[index]);
         };
 
-        $scope.cancel = index => {
+        $scope.cancel = function(index) {
           $scope.todos[index] = angular.copy($scope.editing[index]);
           $scope.editing[index] = false;
         };
 
-        $scope.remove = index => {
+      // Remove ToDo item
+        $scope.remove = function(index) {
           var todo = $scope.todos[index];
-          Todos.remove({ id: todo._id }, () => {
+          Todos.remove({ id: todo._id }, function() {
             $scope.todos.splice(index, 1);
           });
         };
@@ -100,8 +102,8 @@
     '$scope', '$routeParams', 'Todos', '$location', ($scope, $routeParams, Todos, $location) => {
       $scope.todo = Todos.get({ id: $routeParams.id });
 
-      $scope.remove = () => {
-        Todos.remove({ id: $scope.todo._id }, () => {
+      $scope.remove = function() {
+        Todos.remove({ id: $scope.todo._id }, function() {
           $location.url('/');
         });
       };
