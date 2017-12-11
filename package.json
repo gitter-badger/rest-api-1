@@ -27,21 +27,14 @@
     "angular-route": "^1.6.7",
     "body-parser": "^1.18.2",
     "bootswatch": "^4.0.0-beta.2",
-    "bunyan": "^1.8.12",
     "cookie-parser": "^1.4.3",
     "debug": "^2.6.9",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "fingerprintjs2": "^1.5.1",
-    "jquery": "^3.2.1",
-    "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.13.6",
     "morgan": "^1.9.0",
-    "node-fetch": "^1.7.3",
-    "opbeat": "^4.16.0",
-    "serve-favicon": "^2.4.5",
-    "socket.io": "^2.0.4"
+    "opbeat": "^4.16.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
