@@ -3,7 +3,10 @@
 /**
  * Module dependencies.
  */
-
+// enable ES6 ('import'.. etc) in Node
+require('babel-core/register')
+require('babel-polyfill')
+require('dotenv').config()
 let app = require('../app')
 let debug = require('debug')('todo-api:server')
 let http = require('http')
@@ -11,7 +14,7 @@ let http = require('http')
  * Get port from environment and store in Express.
  */
 
-let port = normalizePort(process.env.PORT || '8080')
+let port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
 
 /**
@@ -32,7 +35,7 @@ server.on('listening', onListening)
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort (val) {
   let port = parseInt(val, 10)
 
   if (isNaN(port)) {
@@ -52,25 +55,25 @@ function normalizePort(val) {
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError (error) {
   if (error.syscall !== 'listen') {
     throw error
   }
 
-  let bind = typeof port === 'string' ?
-    'Pipe ' + port :
-    'Port ' + port
+  let bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges')
       process.exit(1)
-      break;
+      break
     case 'EADDRINUSE':
       console.error(bind + ' is already in use')
       process.exit(1)
-      break;
+      break
     default:
       throw error
   }
@@ -80,11 +83,11 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+function onListening () {
   let addr = server.address()
-  let bind = typeof addr === 'string' ?
-    'pipe ' + addr :
-    'port ' + addr.port
+  let bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port
   debug('Listening on ' + bind)
   debug(addr.port)
 }
