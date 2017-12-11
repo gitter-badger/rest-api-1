@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
-let TodoSchema = new mongoose.Schema({
+const TodoSchema = new mongoose.Schema({
   name: String,
   completed: Boolean,
-  note: String,
-});
+  note: String
+})
 
-module.exports = mongoose.model('Todo', TodoSchema);
+module.exports = mongoose.model('Todo', TodoSchema)
