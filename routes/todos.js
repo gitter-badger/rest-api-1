@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/', (req, res, next) => {
   Todo.find((err, todos) => {
     if (err) return next(err)
-    res.json(200, todos)
+    res.status(200).json(todos)
   })
 })
 
@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   Todo.create(req.body, (err, post) => {
     if (err) return next(err)
-    res.json(201, post)
+    res.status(201).json(post)
   })
 })
 
@@ -23,7 +23,7 @@ router.get('/:id', (req, res, next) => {
   console.log(req.params)
   Todo.findById(req.params.id, (err, post) => {
     if (err) return next(err)
-    res.json(200, post)
+    res.status(200).json(post)
   })
 })
 
@@ -32,7 +32,7 @@ router.put('/:id', (req, res, next) => {
   console.log(req.params)
   Todo.findByIdAndUpdate(req.params.id, req.body, (err, post) => {
     if (err) return next(err)
-    res.json(200, { content: post })
+    res.status(201).json(post)
   })
 })
 
@@ -41,7 +41,7 @@ router.delete('/:id', function (req, res, next) {
   console.log(req.params)
   Todo.findByIdAndRemove(req.params.id, req.body, (err, post) => {
     if (err) return next(err)
-    res.json(200, post)
+    res.status(200).json(post)
   })
 })
 
