@@ -8,8 +8,6 @@ dotenv.config()
 chai.should()
 chai.use(chaiHttp)
 
-const TEST_ID = '5a3037ccbbfa8617ff764000'
-
 describe('Database Connection Test', () => {
   it('It should connect to MongoDB', (done) => {
     mongoose.Promise = global.Promise
@@ -39,7 +37,7 @@ describe('Test GET Route Index', () => {
 describe('Test GET Route ToDo', () => {
   it('It should GET ToDo page', (done) => {
     chai.request(app)
-      .get('/#/' + TEST_ID)
+      .get('/#/' + process.env.TEST_ID)
       .end((err, res) => {
         res.should.have.status(200)
         if (err) {
@@ -85,7 +83,7 @@ describe('Test POST to create ToDo', () => {
 
 describe('Test PUT to update existing ToDo', () => {
   it('It should PUT and update ToDO with name mocha-chai as completed', (done) => {
-    const todo = {_id: TEST_ID, name: 'mocha-chai-testing', completed: true, __v: 0}
+    const todo = {_id: process.env.TEST_ID, name: 'mocha-chai-testing', completed: true, __v: 0}
     chai.request(app)
       .put(`/todos/${todo._id}`)
       .send(todo)
@@ -104,7 +102,7 @@ describe('Test PUT to update existing ToDo', () => {
 
 describe('Test DELETE to delete existing ToDo', () => {
   it('It should DELETE ToDO with a name mocha-chai', (done) => {
-    const todo = {_id: TEST_ID, name: 'mocha-chai-testing', completed: true, __v: 0}
+    const todo = {_id: process.env.TEST_ID, name: 'mocha-chai-testing', completed: true, __v: 0}
     chai.request(app)
       .delete(`/todos/${todo._id}`)
       .end((err, res) => {
