@@ -1,6 +1,7 @@
 /* opBeat module integration to send error notification,statistics in realtime
  * https://opbeat.com/semih-personal/semih-personal-backend/errors/4/list/
 */
+import dotenv from 'dotenv'
 import express from 'express'
 import path from 'path'
 import logger from 'morgan'
@@ -11,8 +12,10 @@ import bodyParser from 'body-parser'
 import index from './routes/index'
 import todos from './routes/todos'
 
-// load mongoose package
+// MongoDB
 import mongoose from 'mongoose'
+
+// opBeat Error Logger
 import opbeat from 'opbeat'
 opbeat.start({
   appId: 'f488d9f4a9',
@@ -20,16 +23,15 @@ opbeat.start({
   secretToken: '841a590acc78fe16275fbb613956fc8871f0085f'
 })
 
-// Use native Node promises
-mongoose.Promise = global.Promise
+// .env file reader
+dotenv.config()
 
-// connect to MongoDB
-// Using `mongoose.connect`...
+mongoose.Promise = global.Promise
 mongoose.connection.openUri(process.env.DATABASE_CONNECTION)
 
 const app = express()
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
