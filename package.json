@@ -17,7 +17,7 @@
     "node": "^6.10.2"
   },
   "dependencies": {
-    "angular": "^1.6.7",
+    "angular": "^1.6.8",
     "angular-resource": "^1.6.7",
     "angular-route": "^1.6.7",
     "babel-core": "^6.25.0",
