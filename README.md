@@ -1,4 +1,6 @@
 # todoAPI
+
+[![Join the chat at https://gitter.im/rest-api-1/Lobby](https://badges.gitter.im/rest-api-1/Lobby.svg)](https://gitter.im/rest-api-1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![CircleCI](https://circleci.com/gh/Semyonic/rest-api.svg?style=svg&circle-token=7717f6f59c05f73dc422fbfefc337c052e06ea06)](https://circleci.com/gh/Semyonic/rest-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c252954f1ed4b7987164fa4d2d718d3)](https://www.codacy.com/app/semih.onay/rest-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Semyonic/rest-api&amp;utm_campaign=Badge_Grade)
